@@ -1,9 +1,9 @@
 ### Index
 
 * [Introduction](#Introduction)
-* [Operatrions of the Computer Hardware](#Operatrions-of-the-Computer-Hardware)
-* [Operands of ths Computer Hardware](#)
-* [Representing Instructions in the Computer](#)
+* [Operatrions of the Computer Hardware](#Operatrions_of_the_Computer_Hardware)
+* [Operands of ths Computer Hardware](#Operands_of_ths_Computer_Hardware)
+* [Representing Instructions in the Computer](#Representing_Instructions_in_the_Computer)
 * [Logical Opertions](#)
 * [Instructions for Making Decisions](#)
 * [Supportiong Procedures in Computer Hardware](#)
@@ -25,7 +25,96 @@
   * Stored-program concept
     * instuctions and data of many types can be stored in memory as numbers
     
-### Operatrions-of-the-Computer-Hardware
+### Operatrions_of_the_Computer_Hardware
 * MIPS arithmetic instruction
   * add/sub a,b,c
-  
+* MIPS operands
+  * 32 registers
+    * $s0-$s7, $t0-$t9, $zero, $a0-$a3, $v0-$v1, $gp, $fp, $sp, $ra, $at  
+    $zero always equals 0  
+    register $at is reserved by the assembler to handle large constants.
+  * 2<sup>30</sup> momery words
+    * Memory[0], Memory[4], ... , Memory[4294967292]  
+    Accessed only by transfer instructions. MIPS uses byte addreese. so sequential word addresses differ by 4. Memory holds data structures, arrays, and spilled registers.
+  * ![id](http://www.jamalalsakran.me/Org/MIPS.jpg)
+  * Design principle 1: simplicity favors regularity
+
+### Operands_of_ths_Computer_Hardware
+* Variables vs. operands
+  * Unlike programs in high-level languages, the operands of arithmetic instructions are <a alt = "受限制的">restricted</a>
+    * Operands must be from a limited number of special locations called registers
+    * MIPS has 32 32-bit registers (1 word = 32 bits)
+    * Typically 32 registers on current computers
+  * Design principle 2: smaller is faster
+    * Larger number of registers may increase the clock cycle time and the number of bits required in the instruction format
+    * To balance between the designer’s desire and the limitation of hardware
+  * Example: f = (g + h) – (i + j);
+    * (f, g, h, i, j) are in ($s0, $s1, $s2, $s3, $s4)
+    * add	$t0, $s1, $s2  
+    add	$t1, $s3, $s4  
+    sub	$s0, $t0, $t1
+* Memory operands
+  * Registers only keep small amount of data, but memory contains millions of data elements
+    * Memory is a large single-dimensional array
+    * Address acts as the index to the memory, starting at 0
+  * Data transfer instructions
+    * lw	$destination, offset($base)
+    * sw	$source, offset($base)
+  * Memory address = contents of the base register + offset
+    * Base register: the second register of the instruction
+    * Offset: the constant portion of the instruction
+* Constant or immediate operands
+
+### Representing_Instructions_in_the_Computer
+* MIPS Fields  
+![](http://slideplayer.com/slide/5018290/16/images/5/MIPS+Instruction+Formats.jpg)
+![](http://slideplayer.com/slide/5018290/16/images/6/MIPS+R-Type+(ALU)+Instruction+Fields.jpg)
+* Design principle 3: Good design demands good compromises
+  * To keep all instructions the same length, thereby requiring more than one instruction formats
+![](http://player.slideplayer.com/13/3741739/data/images/img49.jpg)
+* Store-program concept
+  * Key principles
+     * Instructions are represented as numbers
+     * Programs are stored in memory to be read or written, just like data
+  * Fetch and execute cycle
+     * Instructions are fetched and put into a special register
+     * Bits in the register control the subsequent actions
+     * Fetch the next instruction and continue
+### Logical_Operations
+* sll
+* srl
+* R-format instructions
+  * shamt
+* and, andi
+* or, ori
+* nor, nori
+
+### Instructions_for_Making_Decisions
+* beq
+* bne
+* j
+* basic block
+  * A sequence of instructions without branches (except possibly at the end) and without branch targets or branch labels (except possibly at the beginning)
+  * One of the first early phase of compilation is breaking the program into basic blocks
+* Set on less than instruction
+  * slt
+  * slti
+  * sltu = Set on less than unsigned
+  * sltiu = Set on less than immediate unsigned
+* Case/switch statement
+  * Jump address table (jump table)
+  * Jump register (jr)
+
+### Supporting_Procedures_in_Computer_Hardware
+#### Using more registers
+```
+int leaf_example (int g, int h, int i, int j)  
+{  
+   int f;  
+   f = (g + h) – (i + j);  
+   return f;  
+}  
+```
+### Communicating_with_People
+### MIPS_Addressing_for_32-bit_Immediates_and_Addresses
+### Fallacies_and_Pitfalls
