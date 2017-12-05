@@ -1,6 +1,6 @@
 ### Index
 
-* [Introduction](#Introduction)
+* [Introduction](#introduction)
 * [Operatrions of the Computer Hardware](#Operatrions_of_the_Computer_Hardware)
 * [Operands of ths Computer Hardware](#Operands_of_ths_Computer_Hardware)
 * [Representing Instructions in the Computer](#Representing_Instructions_in_the_Computer)
@@ -12,6 +12,7 @@
 * [Fallacies and Pitfalls](#)
 
 ### Introduction
+
 * To command a computer's hardware
   * Instructions: ths words of a Computer's language
   * Instruction set: vocabulary of a computer's language
