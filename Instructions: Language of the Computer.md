@@ -10,6 +10,7 @@
 * [Communicating with People](#communicating_with_people)
 * [MIPS Addressing for 32-Bits Immediates and Addresses](#mips_addressing_for_32-bit_immediates_and_addresses)
 * [Fallacies and Pitfalls](#fallacies_and_pitfalls)
+* [Rerfence](http://apprize.info/usability/interface/2.html)
 
 ### Introduction
 
@@ -108,7 +109,7 @@
   * Jump register (jr)
 
 ### Supporting_Procedures_in_Computer_Hardware
-
+![](https://image.slidesharecdn.com/nikitaabdullin-reverse-engineeringofembeddedmipsdevices-casestudy-drayteksoho-classrouters-111202044836-phpapp02/95/nikita-abdullin-reverseengineering-of-embedded-mips-devices-case-study-draytek-sohoclass-routers-14-728.jpg?cb=1322801826)
 #### Using more registers
 ```
 int leaf_example (int g, int h, int i, int j)  
@@ -121,24 +122,58 @@ int leaf_example (int g, int h, int i, int j)
 ```mips
 (f, g, h, i, j) are in ($s0, $a0, $a1, $a2, $a3)
 
-leaf_example:	addi	$sp, $sp, -12	# adjust stack to make room for 3 items
-	sw	$t1, 8($sp)	# save $t1 for use afterwards
-	sw	$t0, 4($sp)	# save $t0 for use afterwards
-	sw	$s0, 0($sp)	# save $s0 for use afterwards
-	add	$t0, $a0, $a1	# $t0 contains g + h
-	add	$t1, $a2, $a3	# $t1 contains i + j
-	sub	$s0, $t0, $t1	# f = $t0 - $t1, which is (g + h) – (i + j)
-	add	$v0, $s0, $zero	# returns f ($v0 = $s0 + 0)
-	lw	$s0, 0($sp)	# restore $s0 for caller
-	lw	$t0, 4($sp)	# restore $t0 for caller
-	lw	$t1, 8($sp)	# restore $t1 for caller
-	addi	$sp, $sp, 12	# adjust stack to delete 3 items
-	jr	$ra	# jump back to calling routine
+leaf_example:	addi	$sp, 	$sp, 	-12	# adjust stack to make room for 3 items
+		sw	$t1, 	8	($sp)	# save $t1 for use afterwards
+		sw	$t0, 	4	($sp)	# save $t0 for use afterwards
+		sw	$s0, 	0	($sp)	# save $s0 for use afterwards
+		add	$t0, 	$a0, 	$a1	# $t0 contains g + h
+		add	$t1, 	$a2, 	$a3	# $t1 contains i + j
+		sub	$s0, 	$t0, 	$t1	# f = $t0 - $t1, which is (g + h) – (i + j)
+		add	$v0, 	$s0, 	$zero	# returns f ($v0 = $s0 + 0)
+		lw	$s0, 	0	($sp)	# restore $s0 for caller
+		lw	$t0, 	4	($sp)	# restore $t0 for caller
+		lw	$t1, 	8	($sp)	# restore $t1 for caller
+		addi	$sp, 	$sp, 	12	# adjust stack to delete 3 items
+		jr	$ra			# jump back to calling routine
+```
+#### Nested procedures
+* Leaf procedure: a procedure do not call other
+* Recursive procedure call
+  * Conflict over $a0 ~ $a3 and $ra
+  * Solution: to push all the other registers that must be preserved onto the stack
+* Example: compiling a recursive C procedure, showing nested procedure linking
+
+```
+int fact (int n)
+{
+	if (n < 1)  return (1);
+	else  return (n * fact (n – 1));
+}
+```
+```MIPS
+n is in $a0
+
+fact:	addi	$sp, 	$sp, 	-8	# adjust stack for 2 items
+	sw	$ra, 	4	($sp)	# save the return address
+	sw	$a0, 	0	($sp)	# save the argument n
+	slti	$t0, 	$a0, 	1	# test for n < 1
+	beq	$t0, 	$zero, 	L1	# if n >= 1, go to L1
+	addi	$v0, 	$zero, 	1	# return 1
+	addi	$sp, 	$sp, 	8	# pop 2 items off stack
+	jr	$ra			# return to caller
+L1:	addi	$a0, 	$a0, 	-1	# n >= 1: argument gets (n – 1)
+	jal	fact			# call fact with (n – 1)
+	lw	$a0, 	0	($sp)	# return from jal: restore argument n
+	lw	$ra, 	4	($sp)	# restore the return address
+	addi	$sp, 	$sp, 	8	# adjust stack pointer to pop 2 items
+	mul	$v0, 	$a0, 	$v0	# return n * fact (n – 1)
+	jr	$ra			# return to the caller
 ```
 ### Communicating_with_People
 ### MIPS_Addressing_for_32-bit_Immediates_and_Addresses
 ##### Addressing in branches and jumps
 ##### MIPS addressing mode summary
+![](http://apprize.info/usability/interface/interface.files/image147.jpg)
 
 ### Fallacies_and_Pitfalls
 ##### Fallacies
