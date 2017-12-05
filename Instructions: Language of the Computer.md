@@ -137,6 +137,6 @@ leaf_example:	addi	$sp, $sp, -12	# adjust stack to make room for 3 items
 ##### Addressing in branches and jumps
 ##### MIPS addressing mode summary
 
-### [Fallacies](#Fallacies)_and_[Pitfalls](#Pitfalls)
+### Fallacies_and_Pitfalls
 ##### Fallacies
 ##### Pitfalls
