@@ -1,15 +1,15 @@
 ### Index
 
 * [Introduction](#introduction)
-* [Operatrions of the Computer Hardware](#Operatrions_of_the_Computer_Hardware)
-* [Operands of ths Computer Hardware](#Operands_of_ths_Computer_Hardware)
-* [Representing Instructions in the Computer](#Representing_Instructions_in_the_Computer)
-* [Logical Opertions](#)
-* [Instructions for Making Decisions](#)
-* [Supportiong Procedures in Computer Hardware](#)
-* [Communicating with People](#)
-* [MIPS Addressing for 32-Bits Immediates and Addresses](#)
-* [Fallacies and Pitfalls](#)
+* [Operatrions of the Computer Hardware](#operatrions_of_the_computer_hardware)
+* [Operands of ths Computer Hardware](#operands_of_ths_computer_hardware)
+* [Representing Instructions in the Computer](#representing_instructions_in_the_computer)
+* [Logical Opertions](#logical_operations)
+* [Instructions for Making Decisions](#instructions_for_making_decisions)
+* [Supportiong Procedures in Computer Hardware](#supporting_procedures_in_computer_hardware)
+* [Communicating with People](#communicating_with_people)
+* [MIPS Addressing for 32-Bits Immediates and Addresses](#mips_addressing_for_32-bit_immediates_and_addresses)
+* [Fallacies and Pitfalls](#fallacies_and_pitfalls)
 
 ### Introduction
 
@@ -27,18 +27,19 @@
     * instuctions and data of many types can be stored in memory as numbers
     
 ### Operatrions_of_the_Computer_Hardware
-* MIPS arithmetic instruction
-  * add/sub a,b,c
-* MIPS operands
-  * 32 registers
-    * $s0-$s7, $t0-$t9, $zero, $a0-$a3, $v0-$v1, $gp, $fp, $sp, $ra, $at  
-    $zero always equals 0  
-    register $at is reserved by the assembler to handle large constants.
-  * 2<sup>30</sup> momery words
-    * Memory[0], Memory[4], ... , Memory[4294967292]  
-    Accessed only by transfer instructions. MIPS uses byte addreese. so sequential word addresses differ by 4. Memory holds data structures, arrays, and spilled registers.
-  * ![id](http://www.jamalalsakran.me/Org/MIPS.jpg)
-  * Design principle 1: simplicity favors regularity
+#### MIPS arithmetic instruction
+* add/sub a,b,c
+
+#### MIPS operands
+* 32 registers
+  * $s0-$s7, $t0-$t9, $zero, $a0-$a3, $v0-$v1, $gp, $fp, $sp, $ra, $at  
+  $zero always equals 0  
+  register $at is reserved by the assembler to handle large constants.
+* 2<sup>30</sup> momery words
+  * Memory[0], Memory[4], ... , Memory[4294967292]   
+  Accessed only by transfer instructions. MIPS uses byte addreese. so sequential word addresses differ by 4. Memory holds data structures, arrays, and spilled registers.
+* ![id](http://www.jamalalsakran.me/Org/MIPS.jpg)
+* Design principle 1: simplicity favors regularity
 
 ### Operands_of_ths_Computer_Hardware
 * Variables vs. operands
@@ -68,7 +69,7 @@
 
 ### Representing_Instructions_in_the_Computer
 * MIPS Fields  
-![](http://slideplayer.com/slide/5018290/16/images/5/MIPS+Instruction+Formats.jpg)
+[//]: # ( ![](http://slideplayer.com/slide/5018290/16/images/5/MIPS+Instruction+Formats.jpg) )
 ![](http://slideplayer.com/slide/5018290/16/images/6/MIPS+R-Type+(ALU)+Instruction+Fields.jpg)
 * Design principle 3: Good design demands good compromises
   * To keep all instructions the same length, thereby requiring more than one instruction formats
@@ -107,6 +108,7 @@
   * Jump register (jr)
 
 ### Supporting_Procedures_in_Computer_Hardware
+
 #### Using more registers
 ```
 int leaf_example (int g, int h, int i, int j)  
