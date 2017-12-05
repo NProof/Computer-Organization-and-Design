@@ -134,4 +134,9 @@ leaf_example:	addi	$sp, $sp, -12	# adjust stack to make room for 3 items
 ```
 ### Communicating_with_People
 ### MIPS_Addressing_for_32-bit_Immediates_and_Addresses
-### Fallacies_and_Pitfalls
+##### Addressing in branches and jumps
+##### MIPS addressing mode summary
+
+### [Fallacies](#Fallacies)_and_[Pitfalls](#Pitfalls)
+##### Fallacies
+##### Pitfalls
