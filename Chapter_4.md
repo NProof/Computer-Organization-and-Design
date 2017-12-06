@@ -30,3 +30,16 @@ EX.flush
 
 跳到80000180
 2. PC-4
+多個例外
+Imprecise interrupt(exception)
+precise interrupt()
+
+Hardware
+
+
+operating system
+
+Page faults and TLB exception
+
+Superscaller
+Two issues
