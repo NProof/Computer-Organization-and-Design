@@ -1,0 +1,17 @@
+Introduction
+
+Temporal locality
+Spatial locality
+
+memory hierarchy
+
+block (or line)
+
+hit time
+miss penalty
+
+SRAM : 
+
+DRAM : 
+
+Magnetic disk
