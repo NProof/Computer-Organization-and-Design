@@ -1,0 +1,17 @@
+exceptions
+interrupts
+type of event
+form where?
+MIPS terminology
+How Exceptions Are Handled in the MIPS Architecture
+Exception type
+Exception vector address (in hex)
+vectored interrupts
+Exception in a pipelined Implementation
+Exception in a Pipelined Computer
+Hardware/Software Interface
+Elaboration
+imprecise interrupts
+precise interrupts
+Elaboration
+check Yourself
